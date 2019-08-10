@@ -11,9 +11,30 @@ function loadNowPlaying() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-            var albumArt = `<a id="art" href="${response.AlbumUrl}" target="_blank"><img src="${response.AlbumArt}" class="img-thumbnail" /></a>`;
-            var spotifyAvatar = `<a id="avatar" href="${response.SpotifyProfileUrl}" target="_blank"><img src="${response.SpotifyAvatar}" alt"" class="img-spotify-avatar img-thumbnail" /></a>`;
-            var lyricsContributions = `Lyrics from <a id="geniusContributions" href="${response.LyricsContribution}" target="_blank">Genius.com</a>`;
+            var albumArt;
+            var spotifyAvatar;
+            var lyricsContributions;
+            var lyrics;
+            var songName;
+
+            // Check if there is any music playing
+            if (response.IsPlaying === "false") {
+                // If not, set lyrics body to this message
+                lyrics = `It doesn't look like anything is playing right now.</br> Go to <a href="https://open.spotify.com" target="_blank">Spotify</a> so we can show some lyrics.`;
+            }
+            else {
+                // If yes, set to now playing properties
+                albumArt = `<a id="art" href="${response.AlbumUrl}" target="_blank"><img src="${response.AlbumArt}" class="img-thumbnail" /></a>`;
+                lyricsContributions = `Lyrics from <a id="geniusContributions" href="${response.LyricsContribution}" target="_blank">Genius.com</a>`;
+                lyrics = response.Lyrics;
+                songName = "You're Listening to: " + response.NowPlaying;
+            }
+
+            $('#lyrics').html(lyrics);
+            $('#lyricsContributions').html(lyricsContributions);
+            $('#songName').html(songName);
+            spotifyAvatar = `<a id="avatar" href="${response.SpotifyProfileUrl}" target="_blank"><img src="${response.SpotifyAvatar}" alt"" class="img-spotify-avatar img-thumbnail" /></a>`;
+
             if (!firstLoad) {
                 if (currentAlbumArt !== response.AlbumArt) {
                     currentAlbumArt = response.AlbumArt;
@@ -23,17 +44,15 @@ function loadNowPlaying() {
                 if (currentAvatar !== response.SpotifyAvatar) {
                     currentAvatar = response.SpotifyAvatar;
                     $('#spotifyAvatar').html(spotifyAvatar);
-                }                
+                }
             }
             else {
                 $('#spotifyAvatar').html(spotifyAvatar);
                 $('#albumArt').html(albumArt);
                 firstLoad = false;
             }
-            
-            $('#lyrics').html(response.Lyrics);
-            $('#lyricsContributions').html(lyricsContributions);
-            $('#songName').html(response.NowPlaying);
+
+
             var title;
             if (response.NowPlaying !== null) {
                 title = `<title>${response.NowPlaying} - Earworm</title>`;
@@ -43,8 +62,11 @@ function loadNowPlaying() {
                 title = `<title>Earworm</title>`;
                 $('#nowPlayingTitle').html(title);
             }
-            
+
             $('#spotifyUsername').html(response.SpotifyName);
+
+
+
         },
         failure: function (response) {
             alert(response);

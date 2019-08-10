@@ -31,10 +31,16 @@ namespace Earworm.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect(Url.Content("~/"));
+        }
+
+        [HttpGet]
         public JsonResult NowPlaying()
         {
             Dictionary<string, string> nowPlaying = new Dictionary<string, string>();
-            nowPlaying.Add("error", "Couldn't load user data.");
             if (User.Identity.IsAuthenticated)
             {
 
@@ -58,7 +64,7 @@ namespace Earworm.Controllers
                         nowPlaying.Add("SpotifyProfileUrl", "https://open.spotify.com/user/" + profile.Id);
                     }
 
-                    if (context.Item != null)
+                    if (context.Item != null && (context.IsPlaying))
                     {
                         nowPlaying.Add("SongName", context.Item.Name);
                         nowPlaying.Add("SongUrl", context.Item.Href);
@@ -67,6 +73,18 @@ namespace Earworm.Controllers
                         nowPlaying.Add("NowPlaying", nowPlaying["SongName"] + " by " + nowPlaying["ArtistName"]);
                         nowPlaying.Add("AlbumArt", context.Item.Album.Images.FirstOrDefault().Url);
                         nowPlaying.Add("AlbumUrl", context.Item.Album.ExternalUrls["spotify"]);
+                        nowPlaying.Add("IsPlaying", "true");
+                    }
+                    else
+                    {
+                        nowPlaying.Add("SongName", null);
+                        nowPlaying.Add("SongUrl", null);
+                        nowPlaying.Add("ArtistName", null);
+                        nowPlaying.Add("ArtistUrl", null);
+                        nowPlaying.Add("NowPlaying", null);
+                        nowPlaying.Add("AlbumArt", null);
+                        nowPlaying.Add("AlbumUrl", null);
+                        nowPlaying.Add("IsPlaying", "false");
                     }
                     GeniusService geniusService = new GeniusService(nowPlaying["SongName"], nowPlaying["ArtistName"]);
                     nowPlaying.Add("Lyrics", geniusService.Lyrics);

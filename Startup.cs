@@ -40,7 +40,12 @@ namespace Earworm
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = "Spotify";
             })
-              .AddCookie()
+              .AddCookie(options =>
+              {
+                  options.Cookie.Name = "EarwormCookie";
+                  options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                  options.SlidingExpiration = true;
+              })
               .AddOAuth("Spotify", options =>
               {
                   options.ClientId = Configuration["Spotify:ClientId"];
@@ -58,7 +63,6 @@ namespace Earworm
                   options.Scope.Add("streaming");
                   options.SaveTokens = true;
                 });
-
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
