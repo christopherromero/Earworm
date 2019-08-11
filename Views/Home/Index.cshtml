@@ -8,43 +8,45 @@
 
 @if (!User.Identity.IsAuthenticated)
 {
-    <div class="text-center">
-        <h1 class="display-4">Welcome to Earworm</h1>
-        <p>
-            Sign into Spotify to get real time lyrics to the songs you're listening to.
-        </p>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Log In with Spotify</a>
-    </div>
+<div class="text-center">
+    <h1 class="display-4">Welcome to Earworm</h1>
+    @*<i class="droplet" v-for="drop in quantity"></i>*@
+    <p>
+        Log into Spotify to get real time lyrics to the songs you're listening to.
+    </p>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Log in with Spotify</a>
+</div>
 }
 else
 {
-    <script>
-        loadNowPlaying();
-        nowPlaying();
-    </script>
-    <div class="row">
-        <div class="col-md-2">
-            <div id="spotifyAvatar"></div>
-            <p>
-                <div id="spotifyUsername" style="text-align:center"></div>
-            </p>
-        </div>
-        <div class="col-md-5">
-            <p>
-                <div id="lyrics"></div>
-            </p>
-            <sub>
-                <div id="lyricsContributions"></div>
-            </sub>
-        </div>
-        <div class="col-md-5">
-            <h4>
-                <div id="songName"></div>
-            </h4>
-            <p>
-                <div id="albumArt"></div>
-            </p>
-        </div>
+<script>
+    loadNowPlaying();
+    nowPlaying();
+</script>
+<div class="row">
+    <div class="col-md-2">
+        <div id="spotifyAvatar" style="text-align:center"></div>
+        <p>
+            <div id="spotifyUsername" style="text-align:center"></div>
+        </p>
     </div>
+    <div class="col-md-5">
+        <p>
+            <div id="lyrics"></div>
+        </p>
+        <sub>
+            <div id="lyricsContributions"></div>
+            <br /><br />
+        </sub>
+    </div>
+    <div class="col-md-5">
+        <h4>
+            <div id="songName"></div>
+        </h4>
+        <p>
+            <div id="albumArt"></div>
+        </p>
+    </div>
+</div>
 }
 

@@ -19,7 +19,7 @@ namespace Earworm.Models
         public string LyricsUrl;
         public bool LyricsFound = false;
 
-        public GeniusLyrics(string jsonString, string songSpecifics)
+        public GeniusLyrics(string jsonString, string songSpecifics, string songName, string artist)
         {
             rootObject = Newtonsoft.Json.JsonConvert.DeserializeObject<RootObject>(jsonString);
             response = rootObject.response;
@@ -35,9 +35,9 @@ namespace Earworm.Models
                 if (!LyricsFound)
                 {
                     string ft = r.full_title;
-                    ft = Regex.Replace(ft, @" ?\(.*?\)", string.Empty);
-                    songSpecifics = Regex.Replace(songSpecifics, @" ?\(.*?\)", string.Empty);                    
-                    if (ft.Length == songSpecifics.Length)
+                    string pA = r.primary_artist.name;
+                    bool contains = Regex.IsMatch(pA, Regex.Escape(artist), RegexOptions.IgnoreCase);
+                    if (contains)
                     {
                         LyricsUrl = r.url;
                         LyricsFound = true;
