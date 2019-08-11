@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace Earworm.Services
             lyrics = StripTagsRegex(lyrics);
             lyrics = lyrics.Substring(30);
             lyrics = StripNewLines(lyrics);
+            lyrics = CleanEnding(lyrics);
             return lyrics;
         }
         public static string StripTagsRegex(string source)
@@ -40,6 +42,16 @@ namespace Earworm.Services
         public string Urlify(string source)
         {
             return Regex.Replace(source, " ", "%20");
+        }
+
+        public string CleanEnding(string source)
+        {
+            char[] charsToTrim = { '<', 'b', 'r', '>', ' ', '/' };
+            for (int i = 0; i < 20; i++)
+            {
+                source = source.TrimEnd(charsToTrim);
+            }
+            return source;
         }
 
     }

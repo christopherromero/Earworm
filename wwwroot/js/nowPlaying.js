@@ -2,6 +2,13 @@
 var currentAvatar = null;
 var firstLoad = true;
 
+//new Vue({
+//    el: '#droplets',
+//    data: {
+//        quantity: 10,
+//    }
+//});
+
 function loadNowPlaying() {
     console.log('loadNowPlaying');
     $('#result').html('Loading...');
@@ -21,6 +28,7 @@ function loadNowPlaying() {
             if (response.IsPlaying === "false") {
                 // If not, set lyrics body to this message
                 lyrics = `It doesn't look like anything is playing right now.</br> Go to <a href="https://open.spotify.com" target="_blank">Spotify</a> so we can show some lyrics.`;
+                albumArt = "";
             }
             else {
                 // If yes, set to now playing properties
@@ -63,7 +71,7 @@ function loadNowPlaying() {
                 $('#nowPlayingTitle').html(title);
             }
 
-            $('#spotifyUsername').html(response.SpotifyName);
+            $('#spotifyUsername').html("Hello,<br/>" + response.SpotifyName + "!");
 
 
 

@@ -31,7 +31,7 @@ namespace Earworm.Services
             string lyrics = "Hmm. Couldn't find the lyrics for this song...";
             string lyricsUrl = "https://Genius.com";
             string songSpecifics = SongName + " by " + SongArtist;
-            string query = formatter.Urlify(songSpecifics);
+            string query = formatter.Urlify(SongName + " " + SongArtist);
             string url = "https://api.genius.com/search?q=" + query;
             string token = "[GENIUS_API_TOKEN]";
 
@@ -40,7 +40,7 @@ namespace Earworm.Services
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var response = httpClient.GetStringAsync(new Uri(url)).Result;
-                GeniusLyrics geniusLyrics = new GeniusLyrics(response, songSpecifics);
+                GeniusLyrics geniusLyrics = new GeniusLyrics(response, songSpecifics, songName, songArtists);
 
                 if (geniusLyrics.LyricsFound)
                 {

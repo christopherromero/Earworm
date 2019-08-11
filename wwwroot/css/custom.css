@@ -1,3 +1,182 @@
 ﻿.img-spotify-avatar {
     border-radius: 50% !important;
 }
+
+.bg-earworm {
+    background-color: #1e1e1e !important;
+}
+
+.nav-earworm-title{
+    color:whitesmoke !important;
+}
+
+/*Worm from: https://codepen.io/Splode/pen/oZrpeQ */
+
+/*@import url('https://fonts.googleapis.com/css?family=Concert+One');
+
+@mixin drop($delay) {
+    animation: drop-in 1s ease infinite;
+    animation-delay: $delay;
+}
+
+@mixin drop-fade($delay) {
+    animation: drop-in-fade 1s ease infinite;
+    animation-delay: $delay;
+}
+
+#droplets {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+
+
+.droplet {
+    background-color: #1e1e1e;
+    border-radius: 100%;
+    margin: 0 5px;
+    width: 10px;
+    height: 10px;
+    &:nth-child(1)
+
+{
+    @include drop(.1s);
+}
+
+&:nth-child(2) {
+    @include drop(.2s);
+}
+
+&:nth-child(3) {
+    @include drop(.3s);
+}
+
+&:nth-child(4) {
+    @include drop(.4s);
+}
+
+&:nth-child(5) {
+    @include drop(.5s);
+}
+
+&:nth-child(6) {
+    @include drop(.6s);
+}
+
+&:nth-child(7) {
+    @include drop(.7s);
+}
+
+&:nth-child(8) {
+    @include drop(.8s);
+}
+
+&:nth-child(9) {
+    @include drop(.9s);
+}
+
+&:nth-child(10) {
+    @include drop(1s);
+}
+
+}
+
+@keyframes drop-in {
+    0% {
+        transform: translatey(0);
+    }
+
+    33% {
+        transform: translatey(30px);
+    }
+
+    66% {
+        opacity: 1;
+        transform: translatey(30px);
+    }
+
+    100% {
+        transform: translatey(0);
+    }
+}
+
+.droplet-fade {
+    background-color: black;
+    border-radius: 100%;
+    display: inline-block;
+    margin: 0 5px;
+    width: 10px;
+    height: 10px;
+    &:nth-child(1)
+
+{
+    @include drop-fade(.1s);
+}
+
+&:nth-child(2) {
+    @include drop-fade(.2s);
+}
+
+&:nth-child(3) {
+    @include drop-fade(.3s);
+}
+
+&:nth-child(4) {
+    @include drop-fade(.4s);
+}
+
+&:nth-child(5) {
+    @include drop-fade(.5s);
+}
+
+&:nth-child(6) {
+    @include drop-fade(.6s);
+}
+
+&:nth-child(7) {
+    @include drop-fade(.7s);
+}
+
+&:nth-child(8) {
+    @include drop-fade(.8s);
+}
+
+&:nth-child(9) {
+    @include drop-fade(.9s);
+}
+
+&:nth-child(10) {
+    @include drop-fade(1s);
+}
+
+}
+
+@keyframes drop-in-fade {
+    0% {
+        opacity: 0;
+        transform: translatey(-30px);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translatey(30px);
+    }
+
+    50% {
+        transform: translatey(30px);
+    }
+
+    75% {
+        opacity: 0;
+        transform: translatey(-30px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translatey(-30px);
+    }
+}*/
+
